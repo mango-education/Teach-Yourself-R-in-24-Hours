@@ -1,0 +1,25 @@
+---
+title: "Automated Reporting"
+author: "Aimee Gott"
+output: html_document
+---
+
+The following report contains an analysis of the data from 2015. 
+
+## Analysis
+A simple linear model was fitted to the data to determine the main factors that contribute to a change in the dependent variable. We can see below some simple summaries of the data.
+
+```{r, collapse = TRUE}
+library(mangoTraining)
+summary(pkData$Conc)
+```
+
+```{r, echo = FALSE, warning=FALSE}
+library(ggplot2)
+qplot(Time, Conc, data = pkData)
+```
+
+```{r, echo = FALSE}
+library(knitr)
+kable(head(pkData))
+```

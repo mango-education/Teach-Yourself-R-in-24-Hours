@@ -1,0 +1,33 @@
+\documentclass{article}
+
+\title{Automated Reporting with LaTeX}
+\author{Aimee Gott}
+\date{}
+
+\begin{document}
+
+\maketitle
+
+The following report contains an analysis of the data from 2015.
+
+\section{Analysis}
+A simple linear model was fitted to the data to determine the main factors that contribute to a change in the dependent variable. We can see below some simple summaries of the data. 
+
+<<collapse=FALSE>>=
+library(mangoTraining)
+summary(pkData$Conc)
+@
+
+<<echo=FALSE, message=FALSE, warning=FALSE, out.width="8cm">>=
+library(ggplot2)
+qplot(Time, Conc, data = pkData)
+@
+
+<<echo=FALSE>>=
+library(knitr)
+kable(head(pkData))
+@
+
+The median concentration for dose group 25 is \Sexpr{median(pkData$Conc[pkData$Dose == 25])}
+
+\end{document}

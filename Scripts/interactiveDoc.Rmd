@@ -1,0 +1,54 @@
+---
+title: "Untitled"
+author: "Aimee Gott"
+date: "20 September 2015"
+output: html_document
+runtime: shiny
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Including a Shiny Component
+
+The following is an example of how we can include a shiny component inside a markdown document.
+
+```{r, echo=FALSE}
+inputPanel(
+  numericInput(inputId = "num", label = "Number of Simulations:", value = 100),
+  
+  textInput(inputId = "title", label = "Enter title text:")
+)
+
+data <- reactive(rnorm(input$num))
+  
+renderPlot({
+    
+    hist(data(), main = input$title, xlab = "Simulated Data")
+    
+    })
+
+```
+
+## Embedded Application
+
+It's also possible to embed an entire Shiny application within an R Markdown document using the `shinyAppDir` function. This example embeds a Shiny application located in another directory:
+
+```{r tabsets, echo=FALSE}
+shinyAppDir(
+  system.file("examples/06_tabsets", package = "shiny"),
+  options = list(
+    width = "100%", height = 550
+  )
+)
+```
+
+Note the use of the `height` parameter to determine how much vertical space the embedded application should occupy.
+
+You can also use the `shinyApp` function to define an application inline rather then in an external directory.
+
+In all of R code chunks above the `echo = FALSE` attribute is used. This is to prevent the R code within the chunk from rendering in the document alongside the Shiny components.
+
+
+
